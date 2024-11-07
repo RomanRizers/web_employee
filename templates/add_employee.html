@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить сотрудника</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Добавить сотрудника</h1>
+        <form method="post" action="{{ url_for('add_employee') }}">
+            <div class="form-group">
+                <label for="name">Имя:</label>
+                <input type="text" name="name" id="name" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Возраст:</label>
+                <input type="number" name="age" id="age" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="experience">Стаж работы:</label>
+                <input type="number" name="experience" id="experience" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="employee_type">Должность:</label>
+                <select name="employee_type" id="employee_type" class="form-control" required>
+                    <option value="manager">Менеджер</option>
+                    <option value="cashier">Кассир</option>
+                    <option value="picker">Сборщик</option>
+                    <option value="director">Директор</option>
+                </select>
+            </div>
+
+            <div id="manager-fields" class="form-group" style="display: none;">
+                <label for="department">Отдел:</label>
+                <input type="text" name="department" id="department" class="form-control">
+            </div>
+
+            <div id="cashier-fields" class="form-group" style="display: none;">
+                <label for="shift">Смена:</label>
+                <input type="text" name="shift" id="shift" class="form-control">
+            </div>
+
+            <div id="picker-fields" class="form-group" style="display: none;">
+                <label for="zone">Зона сборки:</label>
+                <input type="text" name="zone" id="zone" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Добавить</button>
+        </form>
+    </div>
+
+    <script>
+        document.querySelector('select[name="employee_type"]').addEventListener('change', function() {
+            document.getElementById('manager-fields').style.display = 'none';
+            document.getElementById('cashier-fields').style.display = 'none';
+            document.getElementById('picker-fields').style.display = 'none';
+            
+            if (this.value === 'manager') {
+                document.getElementById('manager-fields').style.display = 'block';
+            } else if (this.value === 'cashier') {
+                document.getElementById('cashier-fields').style.display = 'block';
+            } else if (this.value === 'picker') {
+                document.getElementById('picker-fields').style.display = 'block';
+            }
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

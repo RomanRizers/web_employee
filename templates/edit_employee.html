@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактировать сотрудника</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Редактировать сотрудника</h1>
+        <form method="post">
+            <div class="form-group">
+                <label for="name">Имя:</label>
+                <input type="text" name="name" id="name" class="form-control" value="{{ employee.name }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="age">Возраст:</label>
+                <input type="number" name="age" id="age" class="form-control" value="{{ employee.age }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="experience">Стаж работы:</label>
+                <input type="number" name="experience" id="experience" class="form-control" value="{{ employee.experience }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="employee_type">Должность:</label>
+                <select name="employee_type" id="employee_type" class="form-control" onchange="updateUniqueAttributeField()" required>
+                    <option value="manager" {% if employee.__class__.__name__ == 'Manager' %}selected{% endif %}>Менеджер</option>
+                    <option value="cashier" {% if employee.__class__.__name__ == 'Cashier' %}selected{% endif %}>Кассир</option>
+                    <option value="picker" {% if employee.__class__.__name__ == 'Picker' %}selected{% endif %}>Сборщик</option>
+                    <option value="director" {% if employee.__class__.__name__ == 'Director' %}selected{% endif %}>Директор</option>
+                </select>
+            </div>
+
+            <div id="managerField" class="form-group" style="display: {% if employee.__class__.__name__ == 'Manager' %}block{% else %}none{% endif %};">
+                <label for="department">Отдел:</label>
+                <input type="text" name="department" id="department" class="form-control" value="{{ employee.department }}">
+            </div>
+            
+            <div id="cashierField" class="form-group" style="display: {% if employee.__class__.__name__ == 'Cashier' %}block{% else %}none{% endif %};">
+                <label for="shift">Смена:</label>
+                <input type="text" name="shift" id="shift" class="form-control" value="{{ employee.shift }}" required>
+            </div>
+
+            <div id="pickerField" class="form-group" style="display: {% if employee.__class__.__name__ == 'Picker' %}block{% else %}none{% endif %};">
+                <label for="zone">Зона сборки:</label>
+                <input type="text" name="zone" id="zone" class="form-control" value="{{ employee.zone }}">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

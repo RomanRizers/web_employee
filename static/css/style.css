@@ -1,0 +1,26 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.container {
+    padding: 20px; 
+    border-radius: 5px; 
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.table th, .table td {
+    vertical-align: middle;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem; 
+}
+
+.btn {
+    margin-right: 5px; 
+}
+
+.flex-fill {
+    flex: 1; 
+}
